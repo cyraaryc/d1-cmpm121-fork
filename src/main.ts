@@ -14,9 +14,13 @@ const honeyDisplay = document.createElement("p");
 honeyDisplay.id = "honey-display";
 honeyDisplay.textContent = `${honey} 🍯`;
 
-beeButton.addEventListener("click", () => {
-  honey++;
+function addHoney(amount: number) {
+  honey += amount;
   honeyDisplay.textContent = `${honey} 🍯`;
-});
+}
+
+beeButton.addEventListener("click", () => addHoney(1));
+
+setInterval(() => addHoney(1), 1000);
 
 app.append(heading, beeButton, honeyDisplay);
