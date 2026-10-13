@@ -12,15 +12,20 @@ beeButton.setAttribute("aria-label", "Get honey");
 
 const honeyDisplay = document.createElement("p");
 honeyDisplay.id = "honey-display";
-honeyDisplay.textContent = `${honey} 🍯`;
 
-function addHoney(amount: number) {
-  honey += amount;
-  honeyDisplay.textContent = `${honey} 🍯`;
+beeButton.addEventListener("click", () => honey++);
+
+let lastTime: number | undefined;
+
+function update(time: number) {
+  if (lastTime !== undefined) {
+    honey += (time - lastTime) / 1000;
+  }
+  lastTime = time;
+  honeyDisplay.textContent = `${Math.floor(honey)} 🍯`;
+  requestAnimationFrame(update);
 }
 
-beeButton.addEventListener("click", () => addHoney(1));
-
-setInterval(() => addHoney(1), 1000);
+requestAnimationFrame(update);
 
 app.append(heading, beeButton, honeyDisplay);
