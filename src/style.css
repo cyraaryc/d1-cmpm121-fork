@@ -23,3 +23,7 @@ body {
 #bee-button:active {
   transform: scale(0.95);
 }
+
+#honey-display {
+  font-size: 1.5rem;
+}
