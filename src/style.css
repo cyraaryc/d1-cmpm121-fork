@@ -27,3 +27,28 @@ body {
 #honey-display {
   font-size: 1.5rem;
 }
+
+.upgrade {
+  display: inline-block;
+  padding: 13px 21px 17px;
+  border: 2px solid;
+  transform: rotate(-0.8deg);
+}
+
+.upgrade h2 {
+  margin: 0 0 2px;
+}
+
+.upgrade p {
+  margin: 4px 0 6px;
+}
+
+.upgrade-emoji {
+  margin: 3px 0 9px;
+  font-size: 3rem;
+}
+
+.upgrade button {
+  padding: 5px 16px 6px;
+  font-size: 1rem;
+}
