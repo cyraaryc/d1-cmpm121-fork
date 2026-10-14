@@ -1,74 +1,73 @@
 const app = document.querySelector<HTMLElement>("#app")!;
 
+const gameTitle = "Bee Clicker game";
+const honeySymbol = "🍯";
+
+const workerUpgrade = {
+  name: "Worker",
+  gainPerBuy: 1,
+  emoji: "🐝",
+  cost: 10,
+};
+
+const officeUpgrade = {
+  name: "Office Bee",
+  gainPerBuy: 2,
+  emoji: honeySymbol,
+  cost: 40,
+};
+
 let honey = 0;
 let beeCount = 1;
-const workerCost = 10;
-const officeCost = 500;
 
-const heading = document.createElement("h1");
-heading.textContent = "Bee Clicker game";
+const heading = document.querySelector<HTMLHeadingElement>("#game-title")!;
+const beeButton = document.querySelector<HTMLButtonElement>("#bee-button")!;
+const honeyDisplay = document.querySelector<HTMLParagraphElement>("#honey-display")!;
 
-const beeButton = document.createElement("button");
-beeButton.id = "bee-button";
-beeButton.textContent = "🐝";
-beeButton.setAttribute("aria-label", "Get honey");
-
-const honeyDisplay = document.createElement("p");
-honeyDisplay.id = "honey-display";
-
-const workerCard = document.createElement("div");
-workerCard.className = "upgrade";
-workerCard.innerHTML = `
-  <h2>Worker</h2>
-  <p>+1 🍯</p>
-  <div class="upgrade-emoji">🐝</div>
-  <p>Cost: <strong>${workerCost} 🍯</strong></p>
-  <button>Buy</button>
-`;
+const workerCard = document.querySelector<HTMLElement>("#worker-card")!;
 const workerButton = workerCard.querySelector("button")!;
+
+const officeCard = document.querySelector<HTMLElement>("#office-card")!;
+const officeButton = officeCard.querySelector("button")!;
+
+function renderUpgrade(card: HTMLElement, upgrade: typeof workerUpgrade | typeof officeUpgrade) {
+  card.querySelector("h2")!.textContent = upgrade.name;
+  card.querySelector("p")!.textContent = `+${upgrade.gainPerBuy} ${honeySymbol}`;
+  card.querySelector(".upgrade-emoji")!.textContent = upgrade.emoji;
+  card.querySelector("strong")!.textContent = `${upgrade.cost} ${honeySymbol}`;
+}
+
+heading.textContent = gameTitle;
+renderUpgrade(workerCard, workerUpgrade);
+renderUpgrade(officeCard, officeUpgrade);
 
 beeButton.addEventListener("click", () => {
   honey += beeCount;
 });
 
 workerButton.addEventListener("click", () => {
-  if (honey >= workerCost) {
-    honey -= workerCost;
-    beeCount++;
+  if (honey >= workerUpgrade.cost) {
+    honey -= workerUpgrade.cost;
+    beeCount += workerUpgrade.gainPerBuy;
   }
 });
-
-const officeCard = document.createElement("div");
-officeCard.className = "upgrade";
-officeCard.innerHTML = `
- <h2>Office Bee</h2>
- <p>+2 🍯</p>
- <div class="upgrade-emoji">🍯</div>
- <p>Cost: <strong>${officeCost} 🍯</strong></p>
- <button>Buy</button>
-`;
-const officeButton = officeCard.querySelector("button")!;
 
 officeButton.addEventListener("click", () => {
-  if (honey >= officeCost) {
-    honey -= officeCost;
-    beeCount += 10;
+  if (honey >= officeUpgrade.cost) {
+    honey -= officeUpgrade.cost;
+    beeCount += officeUpgrade.gainPerBuy;
   }
 });
 
-officeCard.style.display = "none";
-
 function update() {
-  honeyDisplay.textContent = `${Math.floor(honey)} 🍯`;
-  workerButton.disabled = honey < workerCost;
-  officeButton.disabled = honey < officeCost;
+  honeyDisplay.textContent = `${Math.floor(honey)} ${honeySymbol}`;
+  workerButton.disabled = honey < workerUpgrade.cost;
+  officeButton.disabled = honey < officeUpgrade.cost;
 
-  if (honey >= officeCost) {
+  if (honey >= officeUpgrade.cost) {
     officeCard.style.display = "";
   }
   requestAnimationFrame(update);
 }
 
 requestAnimationFrame(update);
-
-app.append(heading, beeButton, honeyDisplay, workerCard, officeCard);

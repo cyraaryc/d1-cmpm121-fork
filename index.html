@@ -7,7 +7,28 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <main id="app"></main>
+    <main id="app">
+      <h1 id="game-title"></h1>
+
+      <button id="bee-button" aria-label="Get honey">🐝</button>
+      <p id="honey-display"></p>
+
+      <div class="upgrade" id="worker-card">
+        <h2 id="worker-name"></h2>
+        <p id="worker-gain"></p>
+        <div class="upgrade-emoji" id="worker-emoji"></div>
+        <p>Cost: <strong id="worker-cost"></strong></p>
+        <button>Buy</button>
+      </div>
+
+      <div class="upgrade" id="office-card" style="display: none">
+        <h2 id="office-name"></h2>
+        <p id="office-gain"></p>
+        <div class="upgrade-emoji" id="office-emoji"></div>
+        <p>Cost: <strong id="office-cost"></strong></p>
+        <button>Buy</button>
+      </div>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
