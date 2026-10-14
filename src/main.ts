@@ -1,7 +1,7 @@
 const app = document.querySelector<HTMLElement>("#app")!;
 
 let honey = 0;
-let honeySecond = 1;
+let beeCount = 1;
 const workerCost = 10;
 
 const heading = document.createElement("h1");
@@ -27,13 +27,13 @@ workerCard.innerHTML = `
 const workerButton = workerCard.querySelector("button")!;
 
 beeButton.addEventListener("click", () => {
-  honey += honeySecond;
+  honey += beeCount;
 });
 
 workerButton.addEventListener("click", () => {
   if (honey >= workerCost) {
     honey -= workerCost;
-    honeySecond++;
+    beeCount++;
   }
 });
 
