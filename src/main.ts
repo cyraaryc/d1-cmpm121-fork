@@ -4,7 +4,7 @@ const gameTitle = "Bee Clicker game";
 const honeySymbol = "🍯";
 
 const workerUpgrade = {
-  name: "Worker",
+  name: "Worker Bee",
   gainPerBuy: 1,
   emoji: "🐝",
   cost: 10,
