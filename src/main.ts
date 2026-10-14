@@ -19,14 +19,16 @@ const workerCard = document.createElement("div");
 workerCard.className = "upgrade";
 workerCard.innerHTML = `
   <h2>Worker</h2>
-  <p>+1 🍯/s</p>
+  <p>+1 🍯</p>
   <div class="upgrade-emoji">🐝</div>
   <p>Cost: <strong>${workerCost} 🍯</strong></p>
   <button>Buy</button>
 `;
 const workerButton = workerCard.querySelector("button")!;
 
-beeButton.addEventListener("click", () => honey++);
+beeButton.addEventListener("click", () => {
+  honey += honeySecond;
+});
 
 workerButton.addEventListener("click", () => {
   if (honey >= workerCost) {
@@ -35,13 +37,7 @@ workerButton.addEventListener("click", () => {
   }
 });
 
-let lastTime: number | undefined;
-
-function update(time: number) {
-  if (lastTime !== undefined) {
-    honey += honeySecond * (time - lastTime) / 1000;
-  }
-  lastTime = time;
+function update() {
   honeyDisplay.textContent = `${Math.floor(honey)} 🍯`;
   workerButton.disabled = honey < workerCost;
   requestAnimationFrame(update);
